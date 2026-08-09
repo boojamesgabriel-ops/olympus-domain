@@ -24,8 +24,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <header className="bg-gray-100 p-4 shadow">
+      <body className="min-h-full flex flex-col dark:bg-black">
+        <header className="p-4 bg-black drop-shadow-[0_2px_4px_white]">
           <nav className="flex gap-6">
             <Link href="/" className="hover:underline">Home</Link>
             <Link href="/about" className="hover:underline">About</Link>
