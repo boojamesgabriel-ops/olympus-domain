@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Link from "next/link"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,20 +24,53 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col dark:bg-black">
-        <header className="p-4 bg-black drop-shadow-[0_2px_4px_white]">
-          <nav className="flex gap-6">
-            <Link href="/" className="hover:underline">Home</Link>
-            <Link href="/about" className="hover:underline">About</Link>
-            <Link href="/dashboard" className="hover:underline">Dashboard</Link>
-            <Link href="/manager" className="hover:underline">AI Manager</Link>
-            <Link href="/projects" className="hover:underline">Projects</Link>
-            <Link href="/review" className="hover:underline">Review</Link>
-            <Link href="/settings" className="hover:underline">Settings</Link>
-            <Link href="/health" className="hover:underline">Health</Link>
-          </nav>
+       <header
+          className="
+            fixed top-5 left-5 right-5 z-50
+            h-14 px-6
+            flex items-center
+            rounded-xl
+            border border-white/20
+            bg-black/65
+            backdrop-blur-xl
+            shadow-[0_0_24px_rgba(255,255,255,0.10),inset_0_1px_0_rgba(255,255,255,0.30)]
+          "
+        >
+            <nav className="flex h-full w-full items-center justify-between text-sm text-white">
+              <div className="flex items-center gap-3">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 text-lg">
+                  +
+                </span>
+                <span className="font-medium tracking-[0.18em]">OLYMPUS DOMAIN</span>
+              </div>
+
+              <div className="flex items-center gap-6 text-white/80">
+                <button type="button" className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-green-400" />
+                  Athena
+                </button>
+                <button type="button" className="flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-amber-400" />
+                  Hephaestus
+                </button>
+                <button type="button" className="rounded-full border border-white/20 px-3 py-1 text-white/70">
+                  Add agent
+                </button>
+              </div>
+
+              <div className="flex items-center gap-4 text-white/80">
+                <span className="flex items-center gap-2 text-xs tracking-[0.14em]">
+                  LOCAL · SECURE
+                  <span className="h-2 w-2 rounded-full bg-green-400" />
+                </span>
+                <button type="button" className="h-8 w-8 rounded-full border border-white/20">
+                  JB
+                </button>
+              </div>
+            </nav>
         </header>
 
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 bg-black p-6 text-white">{children}</main>
       </body>
     </html>
   );
