@@ -3,6 +3,12 @@ import { FormEvent, useState } from "react";
 
 import { useChat } from "@ai-sdk/react";
 
+import HephaestusStatusCard from "./HephaestusStatusCard";
+import {
+  isHephaestusStatusInput,
+  isHephaestusStatusOutput,
+} from "@/lib/ai/tool-types";
+
 export default function ArgamemnonChat(){
     const { messages, sendMessage, stop, status, error } = useChat();
     const isStreaming = status === "streaming" || status === "submitted";
@@ -66,6 +72,54 @@ export default function ArgamemnonChat(){
                                     </p>
                                 );
                             }
+
+                            if (part.type === "tool-getHephaestusStatus") {
+                                if (part.state === "input-streaming") {
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="max-w-[80%] rounded-lg border border-blue-300/20 bg-blue-300/10 px-4 py-3 text-sm text-blue-100"
+                                        >
+                                            Preparing Hephaestus status check...
+                                        </div>
+                                    );
+                                }
+
+                                if (part.state === "input-available") {
+                                    const input = isHephaestusStatusInput(part.input)
+                                        ? part.input
+                                        : undefined;
+
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="max-w-[80%] rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-sm text-white/70"
+                                        >
+                                            Checking {input?.projectName ?? "Hephaestus"}...
+                                        </div>
+                                    );
+                                }
+
+                                if (part.state === "output-available") {
+                                    if (!isHephaestusStatusOutput(part.output)) {
+                                        return null;
+                                    }
+
+                                    return <HephaestusStatusCard key={index} status={part.output} />;
+                                }
+
+                                if (part.state === "output-error") {
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="max-w-[80%] rounded-lg border border-red-300/30 bg-red-400/10 px-4 py-3 text-sm text-red-100"
+                                        >
+                                            Hephaestus check failed: {part.errorText}
+                                        </div>
+                                    );
+                                }
+                            }
+
                             return null;
                         })}
                     </article>

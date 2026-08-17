@@ -1,5 +1,5 @@
 export type HephaestusStatusInput = {
-    projectName: String;
+    projectName: string;
     includeReviewStatus?: boolean;
     simulateFailure?: boolean;
 };
