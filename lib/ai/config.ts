@@ -1,4 +1,4 @@
-export const ARGAMEMNON_MODEL = "gemini-2.5-flash";
+export const ARGAMEMNON_MODEL = "gemini-2.5-flash-lite";
 
 export const MAX_STREAM_DURATION = 30;
 
