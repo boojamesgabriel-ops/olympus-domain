@@ -26,25 +26,26 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col dark:bg-black">
        <header
           className="
-            fixed top-5 left-5 right-5 z-50
-            h-14 px-6
+            fixed left-3 right-3 top-3 z-50
+            px-4 py-3
             flex items-center
             rounded-xl
             border border-white/20
             bg-black/65
             backdrop-blur-xl
             shadow-[0_0_24px_rgba(255,255,255,0.10),inset_0_1px_0_rgba(255,255,255,0.30)]
+            sm:left-5 sm:right-5 sm:top-5 sm:h-14 sm:px-6 sm:py-0
           "
         >
-            <nav className="flex h-full w-full items-center justify-between text-sm text-white">
-              <div className="flex items-center gap-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 text-lg">
+            <nav className="flex w-full flex-wrap items-center justify-between gap-3 text-sm text-white sm:h-full sm:flex-nowrap">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/25 text-lg">
                   +
                 </span>
-                <span className="font-medium tracking-[0.18em]">OLYMPUS DOMAIN</span>
+                <span className="truncate font-medium tracking-[0.18em]">OLYMPUS DOMAIN</span>
               </div>
 
-              <div className="flex items-center gap-6 text-white/80">
+              <div className="order-3 flex w-full items-center justify-center gap-4 text-white/80 sm:order-none sm:w-auto sm:gap-6">
                 <button type="button" className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-green-400" />
                   Athena
@@ -53,13 +54,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                   <span className="h-2 w-2 rounded-full bg-amber-400" />
                   Hephaestus
                 </button>
-                <button type="button" className="rounded-full border border-white/20 px-3 py-1 text-white/70">
+                <button type="button" className="hidden rounded-full border border-white/20 px-3 py-1 text-white/70 sm:block">
                   Add agent
                 </button>
               </div>
 
-              <div className="flex items-center gap-4 text-white/80">
-                <span className="flex items-center gap-2 text-xs tracking-[0.14em]">
+              <div className="flex shrink-0 items-center gap-3 text-white/80 sm:gap-4">
+                <span className="hidden items-center gap-2 text-xs tracking-[0.14em] sm:flex">
                   LOCAL · SECURE
                   <span className="h-2 w-2 rounded-full bg-green-400" />
                 </span>
