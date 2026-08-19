@@ -10,20 +10,19 @@ import {
 } from "@/lib/ai/tool-types";
 
 export default function ArgamemnonChat(){
-    const { messages, sendMessage, stop, status, error, regenerate } = useChat();
+    const { messages, sendMessage, stop, status, error, regenerate, clearError } = useChat();
 
     const isStreaming = status === "streaming" || status === "submitted";
     const isWaitingForFirstToken = status === "submitted";
 
     const [input, setInput] = useState("");
-    const [hideError, setHideError] = useState(false);
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         if (!input.trim()) return;
 
-        setHideError(true);
+        clearError();
         sendMessage({ text: input });
         setInput("");
     };
@@ -198,7 +197,7 @@ export default function ArgamemnonChat(){
                 )}
             </form>
 
-            {error && !hideError && (
+            {error && (
                 <div className="mx-4 mb-4 rounded-lg border border-red-300/30 bg-red-500/10 px-4 py-3 text-sm text-red-100">
                     <p className="font-medium">Argamemnon lost connection</p>
                     <p className="mt-1 text-red-100/70">The last response failed. You can retry the last message.</p>
@@ -206,7 +205,7 @@ export default function ArgamemnonChat(){
                     <button
                         type="button"
                         onClick={() => {
-                            setHideError(false);
+                            clearError();
                             regenerate();
                         }}
                         className="mt-3 rounded-full border border-red-200/30 px-3 py-2 text-xs text-red-50 hover:bg-red-200/10"
